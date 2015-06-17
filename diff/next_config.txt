@@ -1,0 +1,35 @@
+diff --git a/_config.yml b/_config.yml
+index feb2741..b5ade09 100755
+--- a/_config.yml
++++ b/_config.yml
+@@ -11,18 +11,18 @@ menu:
+ favicon: /favicon.ico
+ 
+ # Set default keywords (Use a comma to separate)
+-keywords: "Hexo,next"
++keywords: "IoT,RaspberryPi,Arduino,Meshblu,Docker,Node.js,Clojure,ClojureScript"
+ 
+ # Set rss to false to disable feed link.
+ # Leave rss as empty to use site's feed link.
+ # Set rss to specific value if you have burned your feed already.
+-rss:
++rss: /rss2.xml
+ 
+ # Icon fonts
+ # Place your font into next/source/fonts, specify directory-name and font-name here
+ # Avialable: default | linecons | fifty-shades | feather
+-icon_font: default
+-#icon_font: fifty-shades
++#icon_font: default
++icon_font: fifty-shades
+ #icon_font: feather
+ #icon_font: linecons
+ 
+@@ -74,3 +74,7 @@ images: images
+ 
+ # Theme version
+ version: 0.4.3
++
++# Miscellaneous
++google_analytics: UA-51028199-1
++favicon: /favicon.ico
