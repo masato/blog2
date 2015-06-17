@@ -388,4 +388,4 @@ $ cd /workspace/blog
 $ hexo clean && hexo deploy --generate
 ```
 
-Nitrous.IOの無料版では`cd`コマンドでさえ重いくらいになっていましたが、Markdownのコンパイルもとても速くなりさくさく動くようになりました。Cloud IDEでブログを書いて[GitHub Pages](https://pages.github.com/)にデプロイする環境が自分クラウドにできました。こちらがCloud9の新環境でデプロイしたHexoの[ページ](https://masato.github.io/2015/06/17/cloud9-on-idcf-hexo-next/)です。こちらがCloud9の新環境でデプロイしたHexoの[ブログ](https://masato.github.io/2015/06/17/cloud9-on-idcf-hexo-next/)です。
+Nitrous.IOの無料版では`cd`コマンドでさえ重いくらいになっていましたが、Markdownのコンパイルもとても速くなりさくさく動くようになりました。Cloud IDEでブログを書いて[GitHub Pages](https://pages.github.com/)にデプロイする環境が自分クラウドにできました。こちらがCloud9の新環境でデプロイしたHexoの[ページ](https://masato.github.io/2015/06/17/cloud9-on-idcf-hexo-next/)です。
