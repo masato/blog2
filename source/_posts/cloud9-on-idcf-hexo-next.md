@@ -48,11 +48,30 @@ npmから[hexo-cli](https://github.com/hexojs/hexo-cli)をインストールし�
 
 ### npm install
 
-インストールの手順は[Hexo](https://hexo.io/)に書いてあるようにとても簡単です。Cloud9をWebブラウザから開いてコンソールを使います。
+インストールの手順は[Hexo](https://hexo.io/)に書いてあるようにとても簡単です。Dockerfileにhexo-cliのインストールを追加します。
+
+```bash:~/node_apps/docker-cloud9/Dockerfile
+FROM node:0.12
+MAINTAINER Masato Shimizu <ma6ato@gmail.com>
+
+RUN git clone https://github.com/c9/core.git /cloud9 && \
+    cd /cloud9 && ./scripts/install-sdk.sh
+
+RUN npm install hexo-cli -g
+WORKDIR /workspace
+```
+
+Dockerイメージをビルドし直して起動します。
+
+```bash
+$ docker-compose build
+$ docker-compose up -d
+```
+
+Cloud9をWebブラウザから開いてコンソールから`hexo init`を実行します。
 
 ```bash
 $ cd /workspace
-$ npm install hexo-cli -g
 $ hexo init blog
 ```
 

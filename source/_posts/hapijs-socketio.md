@@ -7,7 +7,7 @@ tags:
 description: Hapi.jsのREST APIが一通り動くようになったので次はHapi.jsにSocket.IOサーバーを作成してみます。Using hapi.js with Socket.ioにとても良いSocket.IOの解説があります。著者のMatt Harrison氏はManningでHapi.js in ActionをMEAPで執筆中です。ブログが非常にわかりやすいので著書も期待できます。
 ---
 
-Hapi.jsのREST APIが[一通り動く](/2015/06/13/hapijs-plugins/)ようになったので次はHapi.jsにSocket.IOサーバーを作成してみます。[Using hapi.js with Socket.io](http://matt-harrison.com/using-hapi-js-with-socket-io/)にとても良いSocket.IOの解説があります。著者のMatt Harrison氏はManningで[Hapi.js in Action](http://www.manning.com/harrison/)をMEAPで執筆中です。ブログが非常にわかりやすいので著書も期待できます。
+[Hapi.js](http://hapijs.com/)のREST APIが[一通り動く](/2015/06/13/hapijs-plugins/)ようになったので次はHapi.jsにSocket.IOサーバーを作成してみます。[Using hapi.js with Socket.io](http://matt-harrison.com/using-hapi-js-with-socket-io/)にとても良いSocket.IOの解説があります。著者のMatt Harrison氏はManningで[Hapi.js in Action](http://www.manning.com/harrison/)をMEAPで執筆中です。ブログが非常にわかりやすいので著書も期待できます。
 
 <!-- more -->
 

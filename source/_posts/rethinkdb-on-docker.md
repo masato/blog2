@@ -171,4 +171,3 @@ r.table('tv_shows').filter(r.row('episodes').gt(100))
 `Raw view`のタブに切り換えると表形式で見やすく表示してくれます。
 
 ![query.png](/2015/05/25/rethinkdb-on-docker/query.png)
-
