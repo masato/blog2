@@ -2,6 +2,7 @@ title: "ClojureでDatalogやJSON Storageを扱うためのリソース"
 date: 2015-05-24 11:32:21
 tags:
  - Clojure
+ - ClojureScript
  - Datalog
  - Datomic
  - Liberator

@@ -42,6 +42,66 @@ description: 先日IDCFクラウドのDocker上に構築したCloud9環境に、
 }
 ```
 
+## Dockerホストとタイムゾーンを合わせる
+
+Dockerホストの`/etc/localtime`をリードオンリーでDockerコンテナにマップします。これでDockerコンテナも同じタイムゾーンで起動します。HexoはURLに日付が入っているのでタイムゾーンが変わると時間帯によってはURLが変わってしまいます。
+
+```yaml:~/node_apps/docker-cloud9/docker-compose.yml
+  volumes:
+    - ./workspace:/workspace
+    - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+    - ~/.gitconfig:/home/docker/.gitconfig:ro
+    - /etc/localtime:/etc/localtime:ro
+```
+
+## GitHubの設定
+
+### SSHキーの作成
+
+Hexoは[GitHub Pages](https://pages.github.com/)にデプロイするので、予めDockerホスト上でキーペアを作成しておきます。
+
+```bash
+$ cd ~/.ssh
+$ ssh-keygen -t rsa -b 4096 -C "ma6ato@gmail.com"
+```
+
+GitHubの[SSHキー作成](https://help.github.com/articles/generating-ssh-keys/)ページの手順で自分のプロファイルにキーを追加します。Docker Composeからcloud9サービスを`up`するときに作業ユーザーで先ほど作成した`~/.ssh`ディレクトリをボリュームとしてマウントします。
+
+```yaml:~/node_apps/docker-cloud9/docker-compose.yml
+cloud9:
+  build: .
+  restart: always
+  ports:
+    - 8080:80
+    - 15454:15454
+    - 3000:3000
+    - 4000:4000
+  volumes:
+    - ./workspace:/workspace
+    - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+    - /etc/localtime:/etc/localtime:ro
+  command: node /cloud9/server.js --port 80 -w /workspace --auth xxx:xxx
+```
+
+### .gitconfigの追加
+
+`/root/.gitconfig`に予め用意しておきます。
+
+```bash:~/node_apps/docker-cloud9/gitconfig
+[user]
+        name = Masato Shimizu
+        email = ma6ato@gmail.com
+[push]
+        default = simple
+```
+
+DockerfikeでADDします。
+
+```
+ADD gitconfig /root/.gitconfig
+```
+
+
 ## Hexoのインストール
 
 npmから[hexo-cli](https://github.com/hexojs/hexo-cli)をインストールします。Dockerコンテナ環境なのでnpmをグローバルにインストールしても環境が汚れることを気にしなくて済みます。旧環境の`blog/source`ディレクトリをGitHub上で管理しているので新環境にHexoをクリーンインストールした後、`git clone`してsourceディレクトリをコピーしようと思います。
