@@ -64,7 +64,7 @@ $ ln -s /dist/node_modules .
 Dockerfileには作業ユーザーを作成します。今回はpackage.jsonを使わずにnpmコマンドでactionheroをグローバルにインストールします。後ほどactionheroコマンドでコードをジェネレーとしますが、カレントディレクトリにpackage.jsonを生成するため空けておきます。
 
 
-```bash:~/node_apps/docker-actionhero/Dockerfile
+```bash ~/node_apps/docker-actionhero/Dockerfile
 FROM node:0.12
 MAINTAINER Masato Shimizu <ma6ato@gmail.com>
 
@@ -85,7 +85,7 @@ CMD []
 
 Docker ComposeでRedisも一緒にインストールします。linksディレクティブで連係できるので簡単です。actionhero.jsはデフォルトは8080でserveします。Dockerホストの8080ポートはすでに使ってしまっているので、ここでは8089にマップします。
 
-```yml:~/node_apps/docker-actionhero/docker-compose.yml
+```yaml ~/node_apps/docker-actionhero/docker-compose.yml
 server:  &defaults
   image: masato/actionhero
   volumes:

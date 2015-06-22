@@ -251,7 +251,7 @@ index 57e708e..5de1f0e 100644
 +author: "Masato Shimizu"
 +email: ma6ato@gmail.com
 +language: default
-+avatar: /images/profile.jpg
++avatar: /images/profile.png
 +timezone: Asia/Tokyo
  
  # URL
@@ -338,7 +338,7 @@ index feb2741..b5ade09 100755
 --- a/_config.yml
 +++ b/_config.yml
 @@ -11,18 +11,18 @@ menu:
- favicon: /favicon.ico
+ favicon: /images/favicon.ico
  
  # Set default keywords (Use a comma to separate)
 -keywords: "Hexo,next"
@@ -367,15 +367,14 @@ index feb2741..b5ade09 100755
 +
 +# Miscellaneous
 +google_analytics: UA-xxx
-+favicon: /favicon.ico
++favicon: /images/favicon.ico
 ```
 
 デフォルトの画像ファイルなどを入れ替えます。
 
 ```
-/workspace/blog/themes/next/source/favicon.ico
-/workspace/blog/themes/next/source/images/profile.jpg
-/workspace/blog/themes/next/source/profile.jpg 
+/workspace/blog/themes/next/source/images/favicon.ico
+/workspace/blog/themes/next/source/images/profile.png
 ```
 
 設定ファイルの編集が終わったのでcommitします。

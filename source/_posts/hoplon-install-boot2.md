@@ -71,7 +71,7 @@ bash:
 
 Clojure用のDockerイメージにはBoot 1の`/usr/local/bin/boot1`とBoot 2の`/usr/local/bin/boot2`コマンドをインストールしています。
 
-```bash:~/clojure_apps/Dockerfile
+```bash ~/clojure_apps/Dockerfile
 FROM clojure
 MAINTAINER Masato Shimizu <ma6ato@gmail.com>
 
@@ -145,7 +145,7 @@ $ cd !$
 Bootの[README](https://github.com/boot-clj/boot)を参考にして簡単なプロジェクトを作成します。
 
 
-```clj:~/clojure_apps/hoplon6-start/build.boot
+```clj ~/clojure_apps/hoplon6-start/build.boot
 (set-env!
   :source-paths #{"src"}
   :dependencies '[[me.raynes/conch "0.8.0"]])
@@ -200,7 +200,7 @@ Installing my-project-0.1.0.jar...
 
 `deftask`にbuildタスクを記述します。comp関数で複数のタスクで構成されるフローを1つのタスクにまとめることができます。composeするタスクのパイプラインは[Transducers](http://clojure.org/transducers)のように左から右に実行されるようです。
 
-```clj:~/clojure_apps/hoplon6-start/build.boot
+```clj ~/clojure_apps/hoplon6-start/build.boot
 (set-env!
   :source-paths #{"src"}
   :dependencies '[[me.raynes/conch "0.8.0"]])
@@ -230,7 +230,7 @@ hoplon6-start/
 
 index.cljs.hlはH1の見出しだけ書いてあります。
 
-```clj:~/clojure_apps/hoplon6-start/src/index.cljs.hl
+```clj ~/clojure_apps/hoplon6-start/src/index.cljs.hl
 (page "index.html")
 
 (html
@@ -257,7 +257,7 @@ index.cljs.hlはH1の見出しだけ書いてあります。
 
 Hoplonのbuild.bootをBoot 2で記述します。サンプルが少ないのですが、[build.boot](https://github.com/mynomoto/hoplon-minimal/blob/master/build.boot)を参考にして依存パッケージのバージョンをそれぞれ最新に変更しています。
 
-```clj:~/clojure_apps/hoplon6-start/build.boot
+```clj ~/clojure_apps/hoplon6-start/build.boot
 (set-env!
   :dependencies  '[[org.clojure/clojure       "1.7.0-RC2"]
                    [adzerk/boot-cljs          "0.0-3308-0"]

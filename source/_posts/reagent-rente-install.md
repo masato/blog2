@@ -24,7 +24,7 @@ description: RenteはReagent(React)とSenteを使ったClojureScriptのフレー
 
 ビルドツールは[Leiningen](http://leiningen.org/)に加えて[Boot](https://github.com/boot-clj/boot)もインストールして使えるようにしています。
 
-```bash:~/clojure_apps/Dockerfile
+```bash ~/clojure_apps/Dockerfile
 FROM clojure
 MAINTAINER Masato Shimizu <ma6ato@gmail.com>
 
@@ -60,7 +60,7 @@ $ docker build -t masato/clojure .
 
 docker-compose.ymlでは、DockerコンテナのタイムゾーンをDockerホストに合わています。
 
-```yaml:~/clojure_apps/docker-compose.yml
+```yaml ~/clojure_apps/docker-compose.yml
 lein: &defaults
   image: masato/clojure
   volumes:
@@ -94,7 +94,7 @@ bash:
 
 `~/.bashrc`にdocker-composeコマンドのエイリアスを作成して再読込します。
 
-```bash:~/.bashrc
+```bash ~/.bashrc
 alias lein='docker-compose run --rm --service-ports lein'
 alias figwheel='docker-compose run --rm --service-ports figwheel'
 alias rente='docker-compose run --rm --service-ports rente'
@@ -113,7 +113,7 @@ $ git clone https://github.com/enterlab/rente docker-rente
 
 docker-compose.ymlの`working_dir`にcloneしたディレクトリを指定します。
 
-```yaml:~/clojure_apps/docker-compose.yml
+```yaml ~/clojure_apps/docker-compose.yml
 lein: &defaults
   image: masato/clojure
   volumes:
@@ -126,7 +126,7 @@ lein: &defaults
 
 Dockerホストはクラウド上で起動しているので、リモートから[Figwheel](https://github.com/bhauman/lein-figwheel/)の3449ポートにWebSocketで接続できるようにpublic IPアドレスを指定します。
 
-```clj:~/clojure_apps/docker-rente/dev/start.cljs
+```clj ~/clojure_apps/docker-rente/dev/start.cljs
 (ns rente.start
   (:require [figwheel.client :as fw]
             [rente.client.app :as app]))
@@ -181,7 +181,7 @@ http://xxx.xxx.xxx.xxx:8080/
 
 テンプレートが生成したClojureScriptの`views.cljs`は以下のようになっています。ボタンの`on-click`イベントで`socket/test-socket-callback`が発火されています。
 
-```clj:~/clojure_apps/docker-rente/src/rente/client/views.cljs
+```clj ~/clojure_apps/docker-rente/src/rente/client/views.cljs
 (ns rente.client.views
   (:require [rente.client.ws :as socket]))
 
@@ -202,7 +202,7 @@ http://xxx.xxx.xxx.xxx:8080/
 
 コールバックを定義しているClojureScriptは以下です。
 
-```clj:~/clojure_apps/docker-rente/src/rente/client/ws.cljs
+```clj ~/clojure_apps/docker-rente/src/rente/client/ws.cljs
 (defn test-socket-callback []
   (chsk-send!
     [:rente/testevent {:message "Hello socket Callback!"}]
@@ -220,7 +220,7 @@ http://xxx.xxx.xxx.xxx:8080/
 `Send Message Event`も同様にコールバック関数は次のようになっています。
 
 
-```clj:~/clojure_apps/docker-rente/src/rente/client/ws.cljs
+```clj ~/clojure_apps/docker-rente/src/rente/client/ws.cljs
 (defn test-socket-event []
   (chsk-send! [:rente/testevent {:message "Hello socket Event!"}]))
 ```

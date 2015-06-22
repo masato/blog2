@@ -30,7 +30,7 @@ $ cd ~/node_apps/docker_actionhero
 雛形のpackage.jsonをblog用に編集します。
 
 
-```json:~/node_apps/docker_actionhero/package.json
+```json ~/node_apps/docker_actionhero/package.json
  {
   "author"      : "Masato Shimizu <ma6ato@gmail.com>",
   "name"        : "my-blog",
@@ -61,7 +61,7 @@ actionheroのコードは[LoopBack](http://loopback.io/)のようなオートマ
 
 アプリの構成管理はDocker Composeを使います。serverサービスでサーバーを起動します。
 
-```yaml:~/node_apps/docker-actionhero/docker-compose.yml
+```yaml ~/node_apps/docker-actionhero/docker-compose.yml
 server:  &defaults
   image: masato/actionhero
   volumes:
@@ -124,7 +124,7 @@ server_1 | 2015-06-22 20:45:03 - emerg: Redis Error (client): Error: Redis conne
 
 Docker Composeを使いワンショットでサービスを実行するコマンドがノイズになってきたのでエイリアスを書きます。
 
-```bash:~/.bashrc
+```bash ~/.bashrc
 alias actionhero='docker-compose run --rm actionhero'
 ```
 
@@ -167,7 +167,7 @@ info:  - wrote file '/app/initializers/blog.js'
 
 `/app/initializers/blog.js`にblogの共通関数を定義します。
 
-```js:~/node_apps/docker-actionhero/initializers/blog.js
+```js ~/node_apps/docker-actionhero/initializers/blog.js
 'use strict';
 
 module.exports = {
@@ -224,7 +224,7 @@ info:  - wrote file '/app/initializers/users.js'
 
 `initializers/users.js`は以下のように作成されました。
 
-```js:~/node_apps/docker-actionhero/initializers/users.js
+```js ~/node_apps/docker-actionhero/initializers/users.js
 'use strict';
 
 var crypto = require('crypto');

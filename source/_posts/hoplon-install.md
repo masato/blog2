@@ -31,7 +31,7 @@ $ tree -L 1
 ビルドツールはLeiningenとBootの1.x系と2.x系をインストールします。Bootのコマンドはそれぞれ`boot1`と`boot2`としています。デフォルトではBootは非rootユーザーが推奨されるためDockerには作業ユーザーの`docker`を作成しています。
 
 
-```bash:~/clojure_apps/Dockerfile
+```bash ~/clojure_apps/Dockerfile
 FROM clojure
 MAINTAINER Masato Shimizu <ma6ato@gmail.com>
 
@@ -123,7 +123,7 @@ boot1:
 build.bootファイルではhoplonのバージョンが`6.0.0-alpha2`になっています。このまま起動すると`java.io.FileNotFoundException`が発生します。[The getting started example doesn't seem to work. #64](https://github.com/tailrecursion/hoplon/issues/64)にあるissueのようにバージョンを`5.10.25`に下げます。
 
 
-```clj:~/clojure_apps/spike-hoplon/build.boot
+```clj ~/clojure_apps/spike-hoplon/build.boot
 ...
   :dependencies '[[tailrecursion/boot.task   "2.2.4"]
                   [tailrecursion/hoplon      "5.10.25"]]
@@ -149,7 +149,7 @@ build.bootファイルではhoplonのバージョンが`6.0.0-alpha2`になっ�
 
 leinの[hoplon-template](https://github.com/tailrecursion/hoplon-template)の[hoplon.clj](https://github.com/tailrecursion/hoplon-template/blob/master/src/leiningen/new/hoplon.clj)を読むとbuild.bootファイルの生成時に`tailrecursion/hoplon`のバージョンを設定しています。バージョンは[ancient-clj](https://github.com/xsc/ancient-clj)を使い、Mavenリポジトリから[最新のバージョン](https://clojars.org/tailrecursion/hoplon)を取得しているようです。
 
-```clj:hoplon.clj
+```clj hoplon.clj
 (def deps
   '[tailrecursion/boot.core
     tailrecursion/boot.task
