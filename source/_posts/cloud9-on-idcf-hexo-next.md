@@ -1,6 +1,5 @@
-title: "Cloud9をIDCFクラウドで使う - Part2: HexoブログをGitHub Pagesにデプロイする"
+title: "Cloud9 on Docker - Part2: HexoブログをGitHub Pagesにデプロイする"
 date: 2015-06-17 14:39:56
-tags:
 tags:
  - Cloud9
  - Nodejs
@@ -110,7 +109,7 @@ npmから[hexo-cli](https://github.com/hexojs/hexo-cli)をインストールし�
 
 インストールの手順は[Hexo](https://hexo.io/)に書いてあるようにとても簡単です。Dockerfileにhexo-cliのインストールを追加します。
 
-```bash:~/node_apps/docker-cloud9/Dockerfile
+```bash ~/node_apps/docker-cloud9/Dockerfile
 FROM node:0.12
 MAINTAINER Masato Shimizu <ma6ato@gmail.com>
 
@@ -154,7 +153,7 @@ $ npm install hexo-deployer-git hexo-generator-feed hexo-generator-sitemap --sav
 
 最終的に以下のようなpackage.jsonになりました。
 
-```json:/workspace/blog/package.json
+```json /workspace/blog/package.json
 {
   "name": "hexo-site",
   "version": "0.0.0",
@@ -338,7 +337,7 @@ index feb2741..b5ade09 100755
 --- a/_config.yml
 +++ b/_config.yml
 @@ -11,18 +11,18 @@ menu:
- favicon: /images/favicon.ico
+ favicon: /favicon.ico
  
  # Set default keywords (Use a comma to separate)
 -keywords: "Hexo,next"
@@ -367,13 +366,13 @@ index feb2741..b5ade09 100755
 +
 +# Miscellaneous
 +google_analytics: UA-xxx
-+favicon: /images/favicon.ico
++favicon: /favicon.ico
 ```
 
 デフォルトの画像ファイルなどを入れ替えます。
 
 ```
-/workspace/blog/themes/next/source/images/favicon.ico
+/workspace/blog/themes/next/source/favicon.ico
 /workspace/blog/themes/next/source/images/profile.png
 ```
 
@@ -389,7 +388,7 @@ $ git commit -m 'next config edit'
 font-familyも好みで変更します。NexTテーマの場合CSSフレームワークは[Styl](https://github.com/tj/styl)です。これはテーマを作る作者によって様々です。
 
 
-```css:workspace/blog/themes/next/source/css/_variables/base.styl
+```css /workspace/blog/themes/next/source/css/_variables/base.styl
 // Font families.
 //$font-family-sans-serif   = "Avenir Next", Avenir, Tahoma, Vendana, sans-serif
 //$font-family-serif        = "PT Serif", Cambria, Georgia, "Times New Roman", serif
@@ -421,7 +420,7 @@ $ cd workspace blog
 
 記述したMarkdownはすべてGitHub上で管理しています。IDCFクラウド上のDockerホストにSSH接続してDocker Composeを起動しているディレクトリに移動します。docker-compose.ymlではCloud9のworkspaceをホストのディレクトリにマウントしています。
 
-```yaml:docker-compose.yml
+```yaml docker-compose.yml
 cloud9:
   build: .
   ports:
@@ -451,7 +450,7 @@ $ ssh-keygen -t rsa -b 4096 -C "ma6ato@gmail.com"
 
 ### デプロイ
 
-```yaml:/workspace/blog/_config.yml
+```yaml /workspace/blog/_config.yml
  # Deployment
  ## Docs: http://hexo.io/docs/deployment.html
  deploy:
