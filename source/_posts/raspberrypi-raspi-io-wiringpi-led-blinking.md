@@ -15,9 +15,9 @@ description: Johnny-FiveにはArdiono以外でもFirmata互換のインタフェ
 
 ## ブレッドボード配線
 
-Raspberry PiにLEDを配線します。アノードはGPIO17(P1-11)と接続します。抵抗は220Ωを使いました。
+Raspberry PiにLEDを配線します。アノードはGPIO17(P1-11)と接続します。抵抗器は1.0K ohmを使いました。
 
-![RaspberryPi-led.png](/2015/03/31/raspberrypi-raspi-io-wiringpi-led-blinking/RaspberryPi-led.png)
+![raspi-led2.png](/2015/03/31/raspberrypi-raspi-io-wiringpi-led-blinking/raspi-led2.png)
 
 ## WiringPi
 
