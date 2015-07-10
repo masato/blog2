@@ -1,5 +1,7 @@
 title: "Node.jsでつくるIoT - Part1: リソース"
 date: 2015-01-14 00:29:23
+categories:
+ - IoT
 tags:
  - IoT
  - JavaScript

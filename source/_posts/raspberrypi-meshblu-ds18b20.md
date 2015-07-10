@@ -1,5 +1,7 @@
 title: "Raspberry PiからMeshbluにDS18B20のセンシングデータを送信する"
 date: 2015-04-02 15:47:29
+categories:
+ - IoT
 tags:
  - RaspberryPi
  - Meshblu

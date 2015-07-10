@@ -1,5 +1,7 @@
 title: "IoTでアボカドの発芽促進とカビを防止する - Part1: リソース"
 date: 2015-05-28 16:08:23
+categories:
+ - IoT
 tags:
  - IoT
  - 電子工作

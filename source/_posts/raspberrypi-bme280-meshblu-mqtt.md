@@ -153,9 +153,9 @@ def main():
 	                 clean_session=True, protocol=mqtt.MQTTv311)
 
     client.username_pw_set(conf["MESHBLU_USER"], conf["MESHBLU_PASSWORD"])
-    client.connect(conf["MESHBLU_URL"], 1883, 60)
     client.on_connect = on_connect
     client.on_publish = on_publish
+    client.connect(conf["MESHBLU_URL"], 1883, 60)
 
     while True:
         retval = sensing()
@@ -188,7 +188,7 @@ MQTTのクライアントは、MQTTブローカーのホストにMosquittoのク
 $ sudo apt-get install mosquitto_client
 ```
 
-mosquitto_subコマンドを使ってsubscribeします。こちらもMeshbluの仕様なのでtopic名やユーザー名はMQTTブローカーの仕様に合わせて使います。
+mosquitto_subコマンドを使ってsubscribeします。こちらもMeshbluの仕様なのでtopic名やユー���ー名はMQTTブローカーの仕様に合わせて使います。
 
 ```bash
 $ mosquitto_sub \
