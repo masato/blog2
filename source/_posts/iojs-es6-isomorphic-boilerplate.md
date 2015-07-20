@@ -91,6 +91,24 @@ description: サーバーサイドはio.jsとKoa、クライアントサイド�
 * [Immutable.js](https://facebook.github.io/immutable-js/): コレクション
 
 
+## react-isomorphic-boilerplate
+
+Joseph Furlott氏がポストしている2つのチュートリアルは非常にわかりやすく、[react-isomorphic-boilerplate](https://github.com/jmfurlott/react-isomorphic-boilerplate)のウォークスルーになっています。特に[Webpack](http://webpack.github.io/)と[react-router](https://github.com/rackt/react-router)の使い方がとても勉強になります。
+
+* [react-isomorphic-boilerplate](https://github.com/jmfurlott/react-isomorphic-boilerplate)
+
+* [Tutorial: Setting Up a Simple Isomorphic React app](http://jmfurlott.com/tutorial-setting-up-a-simple-isomorphic-react-app/)
+* [Tutorial: Setting Up a Single Page React Web App with React-router and Webpack]( http://jmfurlott.com/tutorial-setting-up-a-single-page-react-web-app-with-react-router-and-webpack/)
+
+### 構成
+
+* [Express](http://expressjs.com/): サーバーサイド
+* [React](http://facebook.github.io/react/): クライアントサイド
+* [Babel](https://babeljs.io/): コンパイラ
+* [Webpack](http://webpack.github.io/): モジュール管理
+* [react-router](https://github.com/rackt/react-router): Router
+* [Jade](http://jade-lang.com/): テンプレート
+
 
 ## UniversalJS Boilerplate
 

@@ -150,7 +150,7 @@ def main():
                          clean_session=True, protocol=mqtt.MQTTv311)
 
     client.username_pw_set(conf["TRIGGER_UUID"], conf["TRIGGER_TOKEN"])
-    
+
     client.on_connect = on_connect
     client.on_publish = on_publish
 

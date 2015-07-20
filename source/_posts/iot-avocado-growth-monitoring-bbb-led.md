@@ -194,13 +194,13 @@ $ sudo ./hub_ctrl.py -h 0 -P 1 -p 1
 0を指定すると消灯します。
 
 ```bash
-$ sudo ./hub_ctrl.py -h 0 -P 1 -p 1
+$ sudo ./hub_ctrl.py -h 0 -P 1 -p 0
 ```
 
 ## アボカドとコネクテッドデバイス
 
 赤と青のLEDライトが妖しげです。アボカドの種は３個育てていますが、1つは元気がなく、1つはカビ防止のつもりがLEDの当てすぎで乾燥して割れてしまい、1つだけ順調に育っています。
 
-Raspberry Pi 2はBME280の環境センサーのデータをクラウドのMQTTブローカーにpublishしています。BeagleBlackはクラウドのMQTTブローカーをsubscribeしてLEDライトのコントロールに使っています。
+Raspberry Pi 2はBME280の環境センサーのデータをクラウドのMQTTブローカーにpublishしています。BeagleBone BlackはクラウドのMQTTブローカーをsubscribeしてLEDライトのコントロールに使っています。
 
 ![avocado_bbb.JPG](/2015/07/05/iot-avocado-growth-monitoring-bbb-led/avocado_bbb.JPG)
