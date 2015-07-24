@@ -47,6 +47,7 @@ DS18B20で計測した温度をMQTTブローカーにpubishするPythonのプロ
 ```python ~/python_apps/glow-light-py/w1_publish.py
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import paho.mqtt.client as mqtt
 from time import sleep
 import json
@@ -101,6 +102,12 @@ conf = {
      "W1_ID": "28-xxx",
 ...
 }
+```
+
+PahoのPythonクライアントをインストールします。
+
+```bash
+$ sudo pip install paho-mqtt
 ```
 
 Supervisorの設定ファイルを書きます。`debian`ユーザーが実行するプロセスになります。上記のラップしたシェルスクリプトを実行コマンドにします。
@@ -169,10 +176,13 @@ def led_on_off(on_off):
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
     payload = json.loads(msg.payload)
-    if payload["data"] and payload["data"].has_key("led"):
-        on_off_str = payload["data"]["led"]
-        on_off = "1" if on_off_str == "on" else "0"
-        led_on_off(on_off)
+    on_off_str = payload["data"]
+    if on_off_str == "led-on" :
+        led_on_off("1")
+    elif on_off_str == "led-off" :
+        led_on_off("0")
+    else:
+        pass
 
 def main():
     client = mqtt.Client(client_id='',
@@ -263,6 +273,7 @@ user=pi
 ```python ~/python_apps/bme280-meshblu-py/bme280_publish.py
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import paho.mqtt.client as mqtt
 from time import sleep
 import json
@@ -303,6 +314,12 @@ def main():
 
 if __name__ == '__main__':
     main()
+```
+
+PahoのPythonクライアントをインストールします。
+
+```bash
+$ sudo pip install paho-mqtt
 ```
 
 子プロセスをSupervisorに追加して起動します。

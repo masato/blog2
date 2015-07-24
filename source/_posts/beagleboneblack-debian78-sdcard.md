@@ -217,5 +217,20 @@ pool ntp.nict.jp iburst
 ntpdの再起動をします。
 
 ```bash
-$ sudo /etc/init.d/ntp restart
+$ systemctl start ntp.service
+```
+
+## Vim
+
+エディタのVimをインストールします。
+
+```bash
+$ sudo apt-get install vim
+$ mkdir ~/tmp
+```
+
+バックアップを作らない設定だけします。
+
+```bash ~/.vimrc
+set backupdir=~/tmp
 ```

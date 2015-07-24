@@ -13,7 +13,7 @@ description: 以前Raspberry PiでNode.jsのJohnny-Fiveを使ったLチカのサ
 
 <!-- more -->
 
-## RPi.GPIO 
+## RPi.GPIO
 
 [RPi.GPIO](https://pypi.python.org/pypi/RPi.GPIO)パッケージはRaspberry PiのGPIOを操作するときに使います。pipやapt-getからインストールできます。
 
@@ -57,13 +57,14 @@ GPIO.cleanup()
 
 ## ブレッドボード配線
 
-抵抗器は1K(茶黒赤)を用意しました。LEDを配線します。
+抵抗器は1K(茶黒赤金)を用意しました。LEDを配線します。
 
 ![raspi-led.png](/2015/04/15/raspberrypi-led-blink/raspi-led.png)
 
 ## サンプルプログラム
 
 ```python ~/python_apps/led-blink.py
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
 import time
@@ -85,7 +86,8 @@ GPIO.cleanup()
 GPIOを操作する場合はroot権限が必要になります。プログラムを実行すると3回、1秒間隔でLチカします。
 
 ``` bash
-$ sudo python led-blink.py
+$ chmod +x led-blink.py
+$ sudo ./led-blink.py
 ```
 
 

@@ -134,7 +134,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub Wireless LAN Adap
 [AC Power Control by USB Hub](http://www.gniibe.org/development/ac-power-control-by-USB-hub/index.html)のページに対応USBハブの記載がありますが、NEC製の`Bus 001 Device 002`がUSB連動電源タップをつないでいるデバイスです。root権限で`lsusb`コマンドの詳細が表示できます。
 
 ```bash
-$ sudo lsudb -v
+$ sudo lsusb -v
 ...
 Bus 001 Device 002: ID 0409:005a NEC Corp. HighSpeed Hub
 Device Descriptor:

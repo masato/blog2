@@ -112,15 +112,14 @@ module.exports = (robot) ->
 
     robot.respond /ライトを(つけて|付けて|けして|消して)$/i, (res) ->
         on_off = switch res.match[1]
-            when 'つけて', '付けて' then 'on'
-            when 'けして', '消して' then 'off'
-            else 'on'
-        answer = if on_off == 'on' then 'ピカッ。' else 'カチッ。'
+            when 'つけて', '付けて' then 'led-on'
+            when 'けして', '消して' then 'led-off'
+            else 'led-on'
+        answer = if on_off == 'led-on' then 'ピカッ。' else 'カチッ。'
 
         message =
             devices: process.env.ACTION_3_UUID
-            payload:
-                led: on_off
+            payload: on_off
         client.publish 'message', JSON.stringify(message)
 
         res.send answer + ':flashlight:'
