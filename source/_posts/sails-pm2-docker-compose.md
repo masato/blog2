@@ -1,7 +1,7 @@
 title: "Sails.jsの開発をDocker Composeで行いPM2でファイル監視と再起動をする"
 date: 2015-04-30 11:04:32
 tags:
- - PM2
+ - pm2
  - Sails
  - Docker
  - DockerCompose
@@ -94,7 +94,7 @@ server:
   entrypoint: ["pm2","--no-daemon","start","/opt/pm2/config/development.json"]
   ports:
     - 1337:1337
-    
+
 npm:
   <<: *defaults
   entrypoint: ['/usr/local/bin/npm']
@@ -152,7 +152,7 @@ Removing sailsspike_sails_run_1...
 
 同様にdocker-composeに定義した`npm`サービスを使ってnpmコマンドのバージョンを確認します。
 
-``` bash
+```bash
 $ docker-compose run --rm npm --version
 2.8.4
 Removing sailsspike_npm_run_1...
@@ -160,15 +160,16 @@ Removing sailsspike_npm_run_1...
 
 ちょっとわかりづらいですが、`--entrypoint`フラグを上書きして任意のコマンドも実行できます。結果的にはYAMLでマージした`npm`サービスと同じ動作になります。
 
-``` bash
+
+```bash
 $ docker-compose run --rm --entrypoint="/usr/local/bin/node" sails --version
 v0.12.2
        Removing sailsspike_sails_run_4...
-```       
-       
+```
+
 `server`ディレクトリはコンテナの`/app`ディレクトリにマウントしています。ここに`sails new`コマンドでアプリを作成します。
 
-``` bash
+```bash
 $ docker-compose run --rm sails new
 info: Created a new Sails app `app`!
 Removing sailsspike_sails_run_1...
@@ -177,7 +178,7 @@ Removing sailsspike_sails_run_1...
 `server`サービスをupします。
 
 ``` bash
-$ docker-compose up server 
+$ docker-compose up server
 ```
 
 ブラウザから確認します。

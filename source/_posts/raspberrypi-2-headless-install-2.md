@@ -1,4 +1,4 @@
-title: "はじめてのRaspberry Pi 2 - Part1: セットアップとLチカとI2C通信のBME280を使ってみる"
+title: "myThingsをはじめよう - Part1: はじめてのRaspberry Pi 2セットアップ"
 date: 2015-07-16 11:36:31
 categories:
  - IoT
@@ -8,16 +8,21 @@ tags:
  - Lチカ
  - I2C
  - スイッチサイエンス
-description: 何回かRaspberry Piのセットアップは行っていますが、やはりRaspberry Piに興味を持った初心者の方にはいろいろと敷居が高いようです。いろいろと相談を受けるので、意味はわからないけど、とりあえず手順通りにやってみたらRaspberry Pi 2でLチカができて、環境センサからデータを取得できるようになるまでまとめてみようと思います。
+ - IDCFクラウド
+description: Raspberry Piにはじめて興味を持った方でも、インターネットへの接続、Lチカと環境センサからデータを取得できるようになるまでの手順をまとめてみようと思います。
 ---
 
-何回かRaspberry Piのセットアップは行っていますが、やはりRaspberry Piに興味を持った初心者の方にはいろいろと敷居が高いようです。いろいろと相談を受けるので、意味はわからないけど、とりあえず手順通りにやってみたらRaspberry Pi 2でLチカができて、環境センサからデータを取得できるようになるまでまとめてみようと思います。
+Raspberry Piにはじめて興味を持った方でも、インターネットへの接続、Lチカと環境センサからデータを取得できるようになるまでの手順をまとめてみようと思います。
 
 <!-- more -->
 
-## 用意するもの
+## myThingsをはじめようキット
 
-わかりやすく、まとめてスイッチサイエンスからを購入できる構成にしました。初心者の方から無線LAN USBアダプタを挿したけど、その後どうやって接続するかわからないといった相談を受けたので、USBシリアル変換アダプターも用意してホストマシンと直接シリアル接続できるようにします。Lチカ用にジャンパワイヤとブレッドボードもセットになった部品キットも用意します。
+今回はスイッチサイエンスから発売された[myThingsをはじめようキット](https://www.switch-science.com/catalog/2366/)を使います。このスターターキットを使うと[IDCFクラウド](http://www.idcf.jp/cloud/iot/)を経由して、自作したIoT機器を[myThings](http://mythings.yahoo.co.jp/)と連係できるようになります。はじめてのRaspberry Piの入門キットとして必要な部品が集まっています。
+
+### 用意するもの
+
+Raspberry Piなどをすでに持っている場合は、個別に必要な部品を用意します。Lチカだけだと物足りないので、気温、湿度、気圧が計測できる環境センサの[BME280](https://www.switch-science.com/catalog/2236/)もあわせて使います。
 
 * [Raspberry Pi 2 Model B（RSコンポーネンツ製）](https://www.switch-science.com/catalog/2127/)
 * [Raspberry Pi用microSD 8GB（Raspbian OS 書き込み済）](https://www.switch-science.com/catalog/2252/)
@@ -27,18 +32,16 @@ description: 何回かRaspberry Piのセットアップは行っていますが�
 * [固いジャンパワイヤ　(ブレッドボード用)](https://www.switch-science.com/catalog/314/)
 * [BME280搭載　温湿度・気圧センサモジュール](https://www.switch-science.com/catalog/2236/)
 
-Lチカだけだと物足りないので、気温、湿度、気圧が計測できる環境センサのBME280もあわせて使います。これはRaspberry PiでI2Cを使ってみるサンプルにもなります。
 
 ## USBシリアル変換アダプター
 
-[FTDI USBシリアル変換アダプター(5V/3.3V切り替え機能付き)](https://www.switch-science.com/catalog/1032/)を使ってOSXとRaspberry Pi 2を接続します。[Software Installation (Mac)]( https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable?view=all)を参考にしてGPIOピンにつなぎます。
+[FTDI USBシリアル変換アダプター(5V/3.3V切り替え機能付き)](https://www.switch-science.com/catalog/1032/)を使ってOSXとRaspberry Pi 2を接続します。[Software Installation (Mac)]( https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable?view=all)を参考にしてGPIOピンにつなぎます。電圧切り換えジャンパは3.3V側にしてください。電源はUSB ACアダプタから供給するのでこのUSBシリアル変換アダプタから電源供給はしないでください。
 
-* VCC 赤 (USB-TTL) -> 5V  P2  (Raspberry Pi)
-* GND 黒 (USB-TTL) -> GND P6  (Raspberry Pi)
-* RXD 白 (USB-TTL) -> TXD GPIO14 P8  (Raspberry Pi)
-* TXD 緑 (USB-TTL) -> RXD GPIO15 P10 (Raspberry Pi)
+* GND 黒 (USB-TTL)  ->  GND P6  (Raspberry Pi)
+* RXD 黄色 (USB-TTL)  ->  TXD GPIO14 P8  (Raspberry Pi)
+* TXD 緑 (USB-TTL)  ->  RXD GPIO15 P10 (Raspberry Pi)
 
-![raspi-ftdi.png](/2015/07/16/raspberrypi-2-headless-install-2/raspi-ftdi.png)
+![raspi-ftdi2.png](/2015/07/16/raspberrypi-2-headless-install-2/raspi-ftdi2.png)
 
 FTDIのFT232RL用のドライバは[VCP Drivers](http://www.ftdichip.com/Drivers/VCP.htm)からダウンロードしてインストールします。今回のホストマシンはOSX Yosemite 10.10.4です。`Mac OS X 10.9 and above`の[FTDIUSBSerialDriver_v2_3.dmg](http://www.ftdichip.com/Drivers/VCP/MacOSX/FTDIUSBSerialDriver_v2_3.dmg)をインストールします。`Mac OS X 10.3 to 10.8`の場合は、[FTDIUSBSerialDriver_v2_2_18.dmg](http://www.ftdichip.com/Drivers/VCP/MacOSX/FTDIUSBSerialDriver_v2_2_18.dmg)を使います。
 
@@ -204,7 +207,7 @@ Linux version 4.0.8-v7+ (dc4@dc4-XPS13-9333) (gcc version 4.8.3 20140303 (prerel
 
 ### vim
 
-ここからは好みですが、エディタはvimを使います。
+エディタは好みですがvimを使います。
 
 ``` bash
 $ sudo apt-get install vim

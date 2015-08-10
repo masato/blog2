@@ -5,6 +5,7 @@ tags:
  - BeagleBoneBlack
  - Nodejs
  - npm
+ - pm2
  - EclipseOrion
 description: BeagleBone BlackのファームウェアにAngstromを使う場合はデフォルトでWebブラウザ上で動作するIDEのCloud9がインストールされています。前回SDカードのUbuntu14.04.1にNode.jsとnpmをインストールしました。Cloud9の代わりにEclise Orionを使ってみます。OrionはCloud Foundryと連携が強化されIBM DevOps Servicesでも採用されています。
 ---
