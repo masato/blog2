@@ -94,12 +94,16 @@ C:\MinGW\msys\1.0\bin\mintty
 
 MinttyではエディタとSSHが使えればよいので、vimとopensshをインストールします。
 
-```
+```bash
 $ mincw-get install msys-vim
 $ mincw-get install msys-openssh
 ```
 
-ssh-keygenコマンドでキーペアを作成して、ssh-copy-id 
-などを使い、ログインするサーバーに公開鍵を登録しておきます。
+ssh-keygenコマンドでキーペアを作成します。
 
+```bash
+$ ssh-keygen -t rsa
+```
+
+[ssh-copy-idのシェルスクリプト](http://gabrielsomoza.com/server-administration/ssh-copy-id-implementation-for-mingw-and-msys/)などを使いログインするサーバーに公開鍵を登録しておきます。
 

@@ -238,6 +238,7 @@ command=/usr/local/bin/ngrok http --authtoken xxx -subdomain=xxx 8081
 numprocs=1
 redirect_stderr=true
 stdout_logfile=/var/log/ngrok-webcam.log
+autorestart=true
 user=pi
 ```
 
@@ -286,7 +287,7 @@ WidgetのプラスアイコンをクリックしてWidgetの編集をします�
 
 * TYPE: Picture
 * IMAGE URL: ngrokがトンネルしているURL
-* REFRESH EVERY: 0にしてリフレッシュしない
+* REFRESH EVERY: 3600 (画面が消えるのでたまにリフレッシュする)
 
 ![avocado-edit-widget.png](/2015/08/08/raspberrypi-ngrok-motion/avocado-edit-widget.png)
 
