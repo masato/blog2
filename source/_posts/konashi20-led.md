@@ -1,5 +1,7 @@
 title: "konashi 2.0 入門 - Part2: Lチカ"
 date: 2015-08-23 20:53:15
+categories:
+ - IoT
 tags:
  - konashi
  - JavaScript

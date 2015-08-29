@@ -8,6 +8,7 @@ tags:
  - Hapijs
  - React
  - Webpack
+ - packagejson
 description: サーバーサイドはio.jsとKoa、クライアントサイドはReactを使って、ES6で書くIsomorphicアプリを開発してみようと思います。まずはBoilerplateやチュートリアル、ライブラリなどのリソースを集めてみました。Koa、Reactに加えてBabel、Webpack or Browserifyというのが基本的なアーキテクチャになりそうです。
 ---
 
@@ -15,6 +16,36 @@ description: サーバーサイドはio.jsとKoa、クライアントサイド�
 
 
 <!-- more -->
+
+## Isomorphic-React-Starter
+
+**Update: 2015-08-29**
+
+Webデザインと開発のチュートリアルサイトの[SitePoint](http://www.sitepoint.com/)に、Isomorphicアプリ開発の簡単な[チュートリアル](http://www.sitepoint.com/creating-isomorphic-apps-node-js-react-express/)が掲載されています。Getting Startedにはちょうど良いです。
+
+また、package.jsonのscriptsフィールドのサンプルが書いてあります。babelでトランスパイラしたりwebpackの開発サーバーを起動するので、こんな感じでまとめることが多いです。
+
+```json package.json
+"clean": "rm -rf lib",
+"watch-js": "./node_modules/.bin/babel src -d lib --experimental -w",
+"dev-server": "node lib/server/webpack",
+"server": "nodemon lib/server/server",
+"start": "npm run watch-js & npm run dev-server & npm run server",
+"build": "npm run clean && ./node_modules/.bin/babel src -d lib --experimental"
+```
+
+* [Isomorphic-React-Starter](https://github.com/sitepoint-editors/Isomorphic-React-Starter)
+* [Creating Isomorphic Apps with Node.js, React, and Express](http://www.sitepoint.com/creating-isomorphic-apps-node-js-react-express/)
+
+### 構成
+
+* [Express](http://expressjs.com/): サーバーサイド
+* [React](http://facebook.github.io/react/): クライアントサイド
+* [Babel](https://babeljs.io/): コンパイラ
+* [Webpack](http://webpack.github.io/): モジュール管理
+* [react-router](https://github.com/rackt/react-router): Router
+* [Jade](http://jade-lang.com/): テンプレート
+
 
 ## The React.js Way
 
@@ -80,7 +111,7 @@ description: サーバーサイドはio.jsとKoa、クライアントサイド�
 * [What’s wrong with Angular 1](https://medium.com/este-js-framework/whats-wrong-with-angular-js-97b0a787f903)
 * [What I would recommend instead of Angular.js?](https://medium.com/este-js-framework/what-i-would-recommend-instead-of-angular-js-62b057d8a9e)
 
- 
+
 ### 構成
 
 * [Express](http://expressjs.com/): サーバーサイド

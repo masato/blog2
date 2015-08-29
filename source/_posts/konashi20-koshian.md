@@ -1,5 +1,7 @@
 title: "konashi 2.0 入門 - Part1: konashiとKoshian"
 date: 2015-08-22 16:05:32
+categories:
+ - IoT
 tags:
  - フィジカル・コンピューティング
  - konashi

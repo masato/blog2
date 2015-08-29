@@ -6,6 +6,7 @@ tags:
  - Clojure
  - ClojureScript
  - React
+ - Reagent
  - Rente
  - Sente
  - Figwheel
