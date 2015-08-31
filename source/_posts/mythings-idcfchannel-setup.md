@@ -7,6 +7,7 @@ tags:
  - IDCFクラウド
  - IDCFチャンネル
  - Meshblu
+description: myThingsに自分のデバイスを接続することができる「IDCF」チャンネルは、Meshblu IoT Platform を採用しています。またDockerを使い複数のサービスを構成管理しています。はじめてIDCFクラウドを使う方を対象に「IDCF」チャンネル用の仮想マシンをセットアップする手順をまとめます。
 ---
 
 

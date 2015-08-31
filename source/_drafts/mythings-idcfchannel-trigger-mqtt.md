@@ -1,4 +1,4 @@
-title: "myThingsをはじめよう - Part4: 「IDCF」チャンネルのトリガーを使って閾値を超えたらメールする。HTTP編"
+title: "myThingsをはじめよう - Part4: 「IDCF」チャンネルのトリガーをHTTPからを使って閾値を超えたらメールする。"
 date: 2015-08-27 11:52:59
 tags:
 ---
