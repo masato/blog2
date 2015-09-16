@@ -21,8 +21,8 @@ description: スイッチサイエンスから温湿度・気圧センサのBME2
 [使い方](http://trac.switch-science.com/wiki/BME280)にあるArduinoの回路図をみながら、Raspberry Pi 2に以下のように配線します。確認したところ3.3Vに配線するVcoreとVioは基板上でつながっているのでどちらか片方だけでよいみたいです。
 
 ```
-SDI      (BME280)  -> SDA1 P02 (Raspberry Pi)
-SCK      (BME280)  -> SCL1 P03 (Raspberry Pi)
+SDI      (BME280)  -> GPIO2 P03 (Raspberry Pi SDA1)
+SCK      (BME280)  -> GPIO3 P05 (Raspberry Pi SCL1)
 GND,SDO  (BME280)  -> GND  P09 (Raspberry Pi)
 Vio,CSB  (BME280)  -> 3.3v P01 (Raspberry Pi)
 ```

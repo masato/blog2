@@ -188,7 +188,7 @@ MQTTのクライアントは、MQTTブローカーのホストにMosquittoのク
 $ sudo apt-get install mosquitto_client
 ```
 
-mosquitto_subコマンドを使ってsubscribeします。こちらもMeshbluの仕様なのでtopic名やユー���ー名はMQTTブローカーの仕様に合わせて使います。
+mosquitto_subコマンドを使ってsubscribeします。こちらもMeshbluの仕様なのでtopic名やユーザー名はMQTTブローカーの仕様に合わせて使います。
 
 ```bash
 $ mosquitto_sub \

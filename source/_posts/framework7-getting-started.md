@@ -1,4 +1,4 @@
-title: "Framework7でHTML5モバイルアプリをつくる - Part1: Geeting Started"
+title: "Framework7でHTML5モバイルアプリをつくる - Part1: Getting Started"
 date: 2015-08-28 09:27:47
 tags:
  - Framework7
@@ -8,10 +8,10 @@ tags:
  - Express
  - Bower
  - iojs
-description: HTML5モバイルアプリ開発のためのFramework7を試してみようと思います。最近はWindows 10もタブレットモードで操作することが多くなりました。WebコンテンツやアプリのUIはモバイル用の方が使いやすく感じるようになってきています。少し調べたところFramework7がネイティブに近い画面をWebで作ることができそうなので、Geeting Startedしてみます。
+description: HTML5モバイルアプリ開発のためのFramework7を試してみようと思います。最近はWindows 10もタブレットモードで操作することが多くなりました。WebコンテンツやアプリのUIはモバイル用の方が使いやすく感じるようになってきています。少し調べたところFramework7がネイティブに近い画面をWebで作ることができそうなので、Getting Startedしてみます。
 ---
 
-HTML5モバイルアプリ開発のための[Framework7](http://www.idangero.us/framework7/)を試してみようと思います。最近はWindows 10もタブレットモードで操作することが多くなりました。WebコンテンツやアプリのUIはモバイル用の方が使いやすく感じるようになってきています。[少し調べた](/2015/08/27/html5-mobile-apps-resource/)ところFramework7がネイティブに近い画面をWebで作ることができそうなので、Geeting Startedしてみます。
+HTML5モバイルアプリ開発のための[Framework7](http://www.idangero.us/framework7/)を試してみようと思います。最近はWindows 10もタブレットモードで操作することが多くなりました。WebコンテンツやアプリのUIはモバイル用の方が使いやすく感じるようになってきています。[少し調べた](/2015/08/27/html5-mobile-apps-resource/)ところFramework7がネイティブに近い画面をWebで作ることができそうなので、Getting Startedしてみます。
 
 
 <!-- more -->
@@ -24,7 +24,7 @@ HTML5モバイルアプリ開発のための[Framework7](http://www.idangero.us/
 
 ## プロジェクト
 
-[Getting Started](http://www.idangero.us/framework7/get-started/)の短いチュートリアルを実行するプロジェクトを作成します。リポジトリは[こちら](https://github.com/masato/docker-framework7)です。
+[Getting Started](http://www.idangero.us/framework7/get-started/)の短いチュートリアルを実行するプロジェクトを作成します。リポジトリは[こちら](https://github.com/masato/docker-framework7/tree/bower)です。
 
 基本的には掲載されているコードを少し修正して、[Express](http://expressjs.com/)とDockerで動くようにしただけです。
 

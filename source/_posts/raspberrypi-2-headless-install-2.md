@@ -375,8 +375,8 @@ uio                     8219  1 uio_pdrv_genirq
 Raspberry Pi 2にBME280を配線します。
 
 ```
-SDI      (BME280)  -> SDA1 P02 (Raspberry Pi)
-SCK      (BME280)  -> SCL1 P03 (Raspberry Pi)
+SDI      (BME280)  -> GPIO2 P03 (Raspberry Pi SDA1)
+SCK      (BME280)  -> GPIO3 P05 (Raspberry Pi SCL1)
 GND,SDO  (BME280)  -> GND  P09 (Raspberry Pi)
 Vio,CSB  (BME280)  -> 3.3v P01 (Raspberry Pi)
 ```

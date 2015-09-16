@@ -1,5 +1,7 @@
 title: "BeagleBone BlackにBLEアダプタを挿してSensorTagからセンサーデータを取得する"
 date: 2015-02-12 00:10:09
+categories:
+ - IoT
 tags:
  - BeagleBoneBlack
  - EclipseOrion
