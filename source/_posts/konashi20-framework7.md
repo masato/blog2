@@ -12,7 +12,7 @@ description: jsdo.itで作成したkonashi.jsアプリの画面はZepto.jsを使
 ---
 
 
-[jsdo.it](http://jsdo.it/)で作成したkonashi.jsアプリの画面は[Zepto.js](http://zeptojs.com/)[touch.jd](https://github.com/madrobby/zepto/blob/master/src/touch.js)を使っていました。ちょっとシンプルなので最近HTML5モバイルアプリの開発で使っている[Framework7](http://www.idangero.us/framework7/)を使ってLチカとタクトスイッチの画面を作ります。
+[jsdo.it](http://jsdo.it/)で作成したkonashi.jsアプリの画面は[Zepto.js](http://zeptojs.com/)[touch.js](https://github.com/madrobby/zepto/blob/master/src/touch.js)を使っていました。ちょっとシンプルなので最近HTML5モバイルアプリの開発で使っている[Framework7](http://www.idangero.us/framework7/)を使ってLチカとタクトスイッチの画面を作ります。
 
 
 <!-- more -->
@@ -98,7 +98,7 @@ CSSとJavaScriptのロードは上記の[RawGit](https://rawgit.com/)で作成�
                     <div class="navbar-inner">
                         <div class="center sliding">myThings F7</div>
                         <div class="right">
-                            <a href="#" class="link icon-only open-panel"><i class="icon icon-bars-blue"></i></a>
+                            <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@ CSSとJavaScriptのロードは上記の[RawGit](https://rawgit.com/)で作成�
 
 参考にした[コード](http://jsdo.it/monakaz/w1gz)はjQuery互換の[Zepto.js]((http://zeptojs.com/)を使って`$`変数からDOM操作をしていました。Framework7の[Dom7](http://www.idangero.us/framework7/docs/dom.html)は`$`を`$$`に置き換えるとそのまま使えました。
 
-コンポーネントは[touch.jd](https://github.com/madrobby/zepto/blob/master/src/touch.js)とAPIが異なっているのでほぼ書き直しています。
+コンポーネントは[touch.js](https://github.com/madrobby/zepto/blob/master/src/touch.js)とAPIが異なっているのでほぼ書き直しています。
 
 ```js
 (function(Framework7, $$){

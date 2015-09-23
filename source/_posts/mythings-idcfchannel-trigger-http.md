@@ -147,11 +147,11 @@ def main():
     payload = {"trigger":"on"}
 
     while True:
+        sleep(5)
         retval = sensing()
         if retval:
              if float(retval["temperature"]) > conf["THRESHOLD"]:
                  r = requests.post(url, headers=headers, data=payload)
-        sleep(5)
 
 if __name__ == '__main__':
     main()
