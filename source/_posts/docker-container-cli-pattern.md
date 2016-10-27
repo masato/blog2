@@ -6,6 +6,7 @@ tags:
  - Docker
  - DockerCompose
  - ember-cli
+ - CLI
 description: サーバーはDockerコンテナで起動することが多くなりました。サーバーと一緒に使うクライアントもDockerイメージで配布できるとホストマシンの環境も汚さないので便利です。いつくか参考になるDockerfileを見比べながらよいデザインパターンを考えていこうと思います。
 ---
 

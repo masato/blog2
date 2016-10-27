@@ -127,7 +127,7 @@ $ docker exec -it root_moinmoin_1 /bin/bash
 elinksからMoinMoinが起動していることを確認します。
 
 ``` bash
-$ IP_ADDRESS=$(docker inspect --format="&#123;&#123; .NetworkSettings.IPAddress }}" root_moinmoin_1)
+$ IP_ADDRESS=$(docker inspect --format="{{ .NetworkSettings.IPAddress }}" root_moinmoin_1)
 $ elinks $IP_ADDRESS
 ```
 
