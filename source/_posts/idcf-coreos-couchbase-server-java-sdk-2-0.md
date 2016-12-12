@@ -1,7 +1,6 @@
 title: "Couchbase on Docker - Part2: Java SDK 2.0 とGradleでサンプル作成"
 date: 2014-12-23 00:05:04
 tags:
-tags:
  - CoreOS
  - Couchbase
  - CouchbaseServer

@@ -1,7 +1,6 @@
 title: "Reagent入門 - Part5: Renteをインストール"
 date: 2015-06-23 00:15:32
 tags:
-tags:
  - SPA
  - Clojure
  - ClojureScript
@@ -229,4 +228,3 @@ http://xxx.xxx.xxx.xxx:8080/
 ボタンを押すとブラウザのコンソールにコールバックのメッセージが出力されました。
 
 ![rente-pushevent.png](/2015/06/23/reagent-rente-install/rente-pushevent.png)
-

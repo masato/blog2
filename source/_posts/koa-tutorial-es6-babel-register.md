@@ -1,7 +1,6 @@
 title: "Koa入門 - Part2: babel/registerでES6を自動コンパイル"
 date: 2015-06-26 12:58:06
 tags:
-tags:
  - Nodejs
  - ES6
  - Koa
