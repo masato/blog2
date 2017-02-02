@@ -1,5 +1,8 @@
 title: "Eclipse IoT の紹介 - Part1: Eclipse KuraをRaspberry Piにインストールする"
 date: 2017-01-29 15:48:28
+categories:
+ - IoT
+ - EclipseIoT
 tags:
  - EclipseIoT
  - EclipseKura
