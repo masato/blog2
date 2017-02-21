@@ -308,4 +308,22 @@ Help -> Install New Software... -> Add
 * mTooklit: チェック
 
 
+### Plug-in Development Environment (PDE)　プラグイン
+
+　[Plug-in Development Environment (PDE)](http://www.eclipse.org/pde/)はEclipseのプラグインを開発するためのツールです。OSGiプロジェクトの開発ではComponent Definition (component.xml)を作成するウィザードを利用します。
+
+```
+Help -> Install New Software...
+```
+
+ `type filter text`フィールドに`Eclipse plug-in`を入力して検索します。
+
+* Work with: Neon - http://download.eclipse.org/releases/neon
+* type filter text: Eclipse plug-in
+* Eclipse Plug-in Development Environment: チェック
+
+
+![plugin-install.png](/2017/02/01/eclipse-iot-eclipse-neon2-setup/plugin-install.png)
+
+
 　これでEclipse KuraのOSGiバンドル開発のためのEclipse Neon.2のセットアップは終了です。次回はサンプルプロジェクトをビルドして動かして見ようと思います。
