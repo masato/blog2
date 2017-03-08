@@ -33,11 +33,11 @@ description: Android WearやApple Watchが出始めの頃は楽しんで着け�
 ![healt-4.png](/2016/12/12/iphone-health-data-steps-csv/health-4.png)
 
 　
-　iCloud Driveを選択すると同期しているPCのiCloud Driveフォルダに`書き出す.zip`のファイル名でアーカイブが保存されます。
+　iCloud Driveを選択すると同期しているPCのiCloud Driveフォルダに`書き出したデータ.zip`のファイル名でアーカイブが保存されます。
 　
 ## CSVコンバーター
 
-　ヘルスケアデータは`書き出す.zip`の中にあるXML形式の`書き出す.xml`ファイルです。歩数データはエクセルで管理しているのでコピー＆ペーストしやすいようにCSVにコンバートするスクリプトを書きました。
+　ヘルスケアデータは`書き出したデータ.zip`の中にあるXML形式の`書き出したデータ.xml`ファイルです。歩数データはエクセルで管理しているのでコピー＆ペーストしやすいようにCSVにコンバートするスクリプトを書きました。
 　
 　
 　使い方は最初に[ここ](https://github.com/masato/health-data-csv.git)からリポジトリをcloneします。
@@ -48,19 +48,20 @@ $ git clone https://github.com/masato/health-data-csv.git
 $ cd health-data-csv
 ```
 
-　`書き出す.zip`ファイルをcloneしたディレクトリにコピーします。macOSの場合iCloud Driveは以下のディレクトリになります。パスに半角スペースがあるためダブルクォートします。
+　`書き出したデータ.zip`ファイルをcloneしたディレクトリにコピーします。macOSの場合iCloud Driveは以下のディレクトリになります。パスに半角スペースがあるためダブルクォートします。
 
 ```bash
-$ cp "$HOME/Library/Mobile Documents/com~apple~CloudDocs/書き出す.zip" .
+$ cp "$HOME/Library/Mobile Documents/com~apple~CloudDocs/書き出したデータ.zip" .
 ```
 
 　`convert.py`はZipファイルからヘルスケアデータのXMLを取り出し歩数を日別に集計してCSVファイルに出力するPythonスクリプトです。`type`を`HKQuantityTypeIdentifierStepCount`に指定して`Record`要素から歩数データだけ抽出しています。[Pythonによるデータ分析入門 ―NumPy、pandasを使ったデータ処理](https://www.amazon.co.jp/dp/4873116554/)を勉強しているところなのでデータ分析ツールの[pandas](http://pandas.pydata.org/)を使い集計とCSVへの書き出しを実装してみます。
 　
-　[Python 3 で日本語ファイル名が入った zip ファイルを扱う](http://qiita.com/methane/items/8493c10c19ca3584d31d)の記事によると`書き出す.xml`のように日本語ファイル名は`cp437`でデコードされるようです。
+　[Python 3 で日本語ファイル名が入った zip ファイルを扱う](http://qiita.com/methane/items/8493c10c19ca3584d31d)の記事によると`書き出したデータ.xml`のように日本語ファイル名は`cp437`でデコードされるようです。
 
 
 ```python convert.py
 # -*- coding: utf-8 -*-
+
 from lxml import objectify
 import pandas as pd
 from pandas import DataFrame
@@ -74,9 +75,9 @@ def main(argv):
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file',
-                        default='書き出す.zip',
+                        default='書き出した.zip',
                         type=str,
-                        help='zipファイル名 (書き出す.zip)')
+                        help='zipファイル名 (書き出した.zip)')
     parser.add_argument('-s', '--start',
                         action='store',
                         default='2016-01-01',
@@ -92,7 +93,7 @@ def main(argv):
 
     zipfile.ZipFile(args.file).extractall()
 
-    parsed = objectify.parse(open('apple_health_export/書き出す.xml'
+    parsed = objectify.parse(open('apple_health_export/書き出したデータ.xml'
                                   .encode('utf-8').decode('cp437')))
 
     root = parsed.getroot()
@@ -104,10 +105,10 @@ def main(argv):
 
     df = DataFrame(data)
     df.index = pd.to_datetime(df['startDate'])
-    df['value'] = df['value'].astype(float)
 
     # 歩数だけ
-    steps = df[df['type'] == 'HKQuantityTypeIdentifierStepCount']
+    steps = df[df['type'] == 'HKQuantityTypeIdentifierStepCount'].copy()
+    steps['value'] = steps['value'].astype(float)
 
     # 開始日が条件にある場合スライス
     if args.start:
@@ -116,7 +117,7 @@ def main(argv):
     # 日別にグループ化して集計
     steps_sum = steps.groupby(pd.TimeGrouper(freq='D')).sum()
 
-    steps_sum.T.to_csv('steps_{0}.csv'.format(datetime.now().strftime('%Y%m%d%H%M%S')),
+    steps_sum.T.to_csv('./steps_{0}.csv'.format(datetime.now().strftime('%Y%m%d%H%M%S')),
                        index=False, float_format='%.0f')
 
 if __name__ == '__main__':
@@ -136,7 +137,7 @@ $ docker run -it --rm \
   -v $PWD:/app \
   -w /app \
   continuumio/anaconda3 \
-  python convert.py -f 書き出す.zip -s 2016-12-01
+  python convert.py -f 書き出したデータ.zip -s 2016-12-01
 ```
 
 

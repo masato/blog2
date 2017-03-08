@@ -635,7 +635,7 @@ $ sudo /etc/init.d/kura start
 
 ### KuraのWeb UIからアップロードする場合
 
-　Eclipse KuraのWeb UIにログインしてdpファイルをアップロードしてもOSGiバンドルは永続化されます。Webブラウザからデプロイできるのでこちらの方が簡単です。左のPackageメニューからdpファイル���Submitします。
+　Eclipse KuraのWeb UIにログインしてdpファイルをアップロードしてもOSGiバンドルは永続化されます。Webブラウザからデプロイできるのでこちらの方が簡単です。左のPackageメニューからdpファイルをSubmitします。
 
 ```
 Package -> Upload - dpファイル -> Submit
