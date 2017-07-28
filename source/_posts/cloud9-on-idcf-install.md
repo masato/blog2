@@ -69,12 +69,16 @@ Docker Hub RegistryにいくつかCloud9のイメージがあります。
 
 今回はDocker Composeを使ってミニマルにつくりたいので自分でビルドすることにします。
 
+**UPDATE: 2017-03-24 Dockerfileとdocker-compose.ymlを修正**
+
 ```bash ~/node_apps/docker-cloud9/Dockerfile
-FROM node:0.12
+FROM node:7
 MAINTAINER Masato Shimizu <ma6ato@gmail.com>
 
 RUN git clone https://github.com/c9/core.git /cloud9 && \
     cd /cloud9 && ./scripts/install-sdk.sh
+
+RUN npm install hexo-cli -g
 
 WORKDIR /workspace
 ```
@@ -82,17 +86,19 @@ WORKDIR /workspace
 以下のようなdocker-compose.ymlを用意します。portやcommandはこれからも変更していくのでリビルドに時間がかかるDockerイメージには入れませんでした。
 
 ```yaml ~/node_apps/docker-cloud9/docker-compose.yml
-cloud9:
-  build: .
-  ports:
-    - 8080:80
-    - 15454:15454
-    - 3000:3000
-    - 5000:5000
-  volumes:
-    - ./workspace:/workspace
-  command: node /cloud9/server.js --port 80 -w /workspace --auth user:password
-```
+version: '2'
+services:
+  cloud9:
+    build: .
+    restart: always
+    ports:
+      - 80:80
+      - 4000:4000
+    volumes:
+      - ./workspace:/workspace
+      - /etc/localtime:/etc/localtime:ro
+    command: node /cloud9/server.js --port 80 -w /workspace -l 0.0.0.0 --auth user:password
+    ```
 
 Cloud9は80ポートで起動します。Dockerホストで80は他のサービスですでに使っているので8080にマップします。15454ポートはデバッグ用に使うポートです。5000ポートはテスト用のExpressアプリで使います。
 
