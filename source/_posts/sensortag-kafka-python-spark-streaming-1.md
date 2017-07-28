@@ -10,9 +10,9 @@ tags:
 description: Raspberry Pi 3でSensorTagのデータを所得します。
 ---
 
-　このシリーズではRaspberry Pi 3からSensorTagの環境データを取得して、Kafkaを経由したSpark Streamingでウィンド分析するPythonのコードを書いてみようと思います。
+　このシリーズではRaspberry Pi 3からSensorTagの環境データを取得します。その後にKafkaを経由したSpark Streamingでウィンド分析するPythonのコードを書いてみます。
 　
-　Raspberry Pi 3のセットアップ方法は多くの[サンプル](https://masato.github.io/2017/01/29/eclipse-iot-kura-install/)があります。ここでは簡単にSensorTagの環境データを取得します。
+　Raspberry Pi 3のセットアップ方法は多くの[サンプル](https://masato.github.io/2017/01/29/eclipse-iot-kura-install/)があります。ここでは簡単にSensorTagの環境データを取得するための準備をします。
 
 <!-- more -->
 
@@ -27,10 +27,10 @@ description: Raspberry Pi 3でSensorTagのデータを所得します。
 　テキサスインスツルメンツのSensorTagはRaspberry Pi 3とBluetooth接続して温度や湿度といった環境データを簡単に取得することができます。
 　
 * [CC2650](http://www.tij.co.jp/tool/jp/TIDC-CC2650STK-SENSORTAG)
-　
+
 ## macOSでRaspbeian Liteイメージを焼く
 
-　オフィシャルの[Installing operating system images on Mac OS](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)の手順に従います。SDカードのデバイス名を確認します。この例では/dev/disk2です。
+　オフィシャルの[Installing operating system images on Mac OS](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)の手順に従います。SDカードのデバイス名を確認してunmountします。この例では/dev/disk2です。
 
 ```
 $ diskutil list
@@ -43,7 +43,7 @@ $ diskutil list
 $ diskutil unmountDisk /dev/disk2
 ```
 
-　最新のRaspbian Jessie Liteを[ダウンロード](https://www.raspberrypi.org/downloads/raspbian/)してSDカードに焼きます。SSHの有効化も忘れずに行います。
+　Raspbian Jessie Liteを[ダウンロード](https://www.raspberrypi.org/downloads/raspbian/)してSDカードに焼きます。SSHの有効化も忘れずに行います。
 
 ```
 $ cd ~/Downloads
@@ -56,7 +56,7 @@ $ diskutil unmountDisk /dev/disk2
 
 ### mDNSでSSH接続する
 
-　macOS(Sierra 10.12.6)はRaspberry Pi 3とEthernetケーブル接続をして簡単にSSHできます。デフォルトでは以下のユーザーが設定されています。
+　macOSはRaspberry Pi 3とEthernetケーブル接続をして簡単にSSHできます。デフォルトでは以下のユーザーが設定されています。
 
 * username: pi
 * password: raspberry
@@ -65,7 +65,7 @@ $ diskutil unmountDisk /dev/disk2
 $ ssh pi@raspberrypi.local
 ```
 
-　macOSの公開鍵を`~/.ssh/authorized_keys'にコピーします。
+　macOSの公開鍵をRaspberry Pi 3の`~/.ssh/authorized_keys'にコピーします。
 
 ```
 $ mkdir -p -m 700 ~/.ssh
@@ -158,7 +158,7 @@ Characteristic value/descriptor: 94 0b f0 0d
 ObjLSB ObjMSB AmbLSB AmbMSB
 ```
 
-　Python REPLから取得した4バイトを摂氏に変換してSensorTagの周辺温度と物体温度を出力します。
+　Python REPLから取得した4バイトを摂氏に変換して周辺温度と物体温度を出力します。
 
 ```python
 >>> raw_data = '94 0b f0 0d'
@@ -182,13 +182,13 @@ $ sudo apt-get install python-pip libglib2.0-dev -y
 $ sudo pip install bluepy
 ```
 
-　`sensortag`コマンドが使えるようになります。`-T`フラグを付けBDアドレスを引数にして実行します。
+　`sensortag`コマンドが使えるようになります。`-T`フラグを付けBDアドレスを引数に実行します。
 
 ```
 $ sensortag -T B0:B4:48:BE:5E:00
 ```
 
- `-T`フラグを指定すると周囲温度、物体温度の順番に取得できます。
+　`-T`フラグを指定すると周囲温度、物体温度の順番に取得できます。
 
 ```
 Connecting to B0:B4:48:BE:5E:00
@@ -231,9 +231,9 @@ def main():
         counter += 1
         tAmb, tObj = tag.IRtemperature.read()
 
-        print("Temp: ambient: {0:.2f}, object: {1:.2f}".format(tAmb, tObj) )
+        print("温度: 周囲: {0:.2f}, 物体: {1:.2f}".format(tAmb, tObj) )
         humidy, RH = tag.humidity.read()
-        print("Humidity: humidy: {0:.2f}, RH: {1:.2f}".format(humidy, RH))
+        print("湿度: humidy: {0:.2f}, RH: {1:.2f}".format(humidy, RH))
 
         if counter >= count:
            break
@@ -255,14 +255,14 @@ if __name__ == '__main__':
 $ python temp.py B0:B4:48:BE:5E:00
 ```
 
-　5秒間隔で3回計測した結果を出力します。
+　5秒間隔で3回計測した結果を出力します。エアコンが効いてきたので快適になりました。
 
 ```
 Connecting to B0:B4:48:BE:5E:00
-Temp: ambient: 28.66, object: 23.50
-Humidity: humidy: 28.83, RH: 64.75
-Temp: ambient: 28.69, object: 28.75
-Humidity: humidy: 28.83, RH: 64.94
-Temp: ambient: 28.69, object: 23.53
-Humidity: humidy: 28.85, RH: 65.33
+温度: 周囲: 25.03, 物体: 19.94
+湿度: humidy: 25.25, RH: 69.47
+温度: 周囲: 25.06, 物体: 20.69
+湿度: humidy: 25.25, RH: 69.37
+温度: 周囲: 25.06, 物体: 20.69
+湿度: humidy: 25.25, RH: 69.37
 ```
