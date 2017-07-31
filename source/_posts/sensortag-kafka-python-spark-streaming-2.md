@@ -6,14 +6,15 @@ tags:
  - Kafka
  - Landoop
  - SensorTag
+ - Python
 description: Landoopを使いKafkaクラスタをDocker Composeで構築します。
 ---
 
 　[前回](https://masato.github.io/2017/07/27/sensortag-kafka-python-spark-streaming-1/)はRaspberry Pi 3上でSensorTagから環境データを取得するPythonスクリプトを書きました。この環境データはKafkaを経由してストリーム処理する予定です。次にRaspberry Pi 3からメッセージを受け取るKafkaクラスタをクラウド上に構築していきます。
-　
+
 　Kafkaクラスタは[Landoop](http://www.landoop.com)が開発している[fast-data-dev](https://hub.docker.com/r/landoop/fast-data-dev/)のDockerイメージを使います。
 　
-　
+
 <!-- more -->
 
 ## LandoopでKafkaクラスタを構築する
@@ -25,19 +26,19 @@ description: Landoopを使いKafkaクラスタをDocker Composeで構築しま�
 　
 　Landoopでは[Kafka Topics UI](http://kafka-topics-ui.landoop.com/#/)や[Kafka Connect UI](http://kafka-connect-ui.landoop.com/#/)、[Kafka Topics UI](https://hub.docker.com/r/landoop/kafka-topics-ui/)などのWebツールを開発しています。[demo](https://fast-data-dev.demo.landoop.com/)サイトからどのようなツールなのかを確認できます。このdemoサイトと同じ環境は[fast-data-connect-cluster](https://github.com/Landoop/fast-data-connect-cluster)を使うと簡単に構築することができます。
 　
-　
+
 ![landoop-top.png](/2017/07/28/sensortag-kafka-python-spark-streaming-2/landoop-top.png)
 
 
 ### fast-data-connect-cluster
 
 　fast-data-connect-clusterのリポジトリをcloneします。
-　
+
 ```
 $ git clone https://github.com/Landoop/fast-data-connect-cluster
 ```
 　
-　リポジトリに含まれる[docker-compose.yml](https://github.com/Landoop/fast-data-connect-cluster/blob/master/docker-compose.yml)を少し変更してクラウド上で利用します。ここではIDCFクラウドにDebianの仮想マシンを作成してDockerとDocker Composeをインストールしました。バージョンは以下です。
+　リポジトリに含まれる[docker-compose.yml](https://github.com/Landoop/fast-data-connect-cluster/blob/master/docker-compose.yml)を少し変更してクラウド上で利用します。Debianの仮想マシンを用意してDockerとDocker Composeをインストールしました。利用するバージョンは以下です。
 
 ``` bash
 $ docker --version
@@ -50,7 +51,13 @@ docker-compose version 1.14.0, build c7bdf9e
 　このdocker-compose.ymlにはLandoopのWebツールに加えて[Confluent Open Source](https://www.confluent.io/product/confluent-open-source/)に含まれる[Kafka](https://kafka.apache.org/)、[Schema Registry](http://docs.confluent.io/current/schema-registry/docs/intro.html)、[Kafka REST Proxy](http://docs.confluent.io/current/kafka-rest/docs/index.html)、[Kafka Connect](http://docs.confluent.io/current/connect/index.html)、[Apache ZooKeeper](https://zookeeper.apache.org/)が含まれます。一通りKafkaを使った開発に必要なコンテナが揃うのでとても便利です。
 
 
-　以下が主な変更点です。
+　現在Confluent Open SourceとKafkaのバージョンは以下になっています。
+　
+* Confluent Open Source: v3.2.2
+* Kafka v0.10.2.1
+
+
+　docker-compose.ymlの主な変更点です。
 
 * ADV_HOST: Dockerが起動している仮想マシンのパブリックIPアドレスを指定します。
 * ports: リモートから接続するためにZooKeeperやKafkaクラスタのポートを公開します。
@@ -108,14 +115,13 @@ services:
 ```
 
 
-
-
 　docker-compose.ymlのディレクトリに移動してコンテナを起動します。
-　
+
 ```
 $ cd fast-data-connect-cluster
 $ docker-compose up -d
 ```
+
 
 ### 動作確認
 
@@ -154,7 +160,7 @@ $ docker-compose exec kafka-stack \
 hello world
 ```
 
-　Kafka Topics UIのページではトピックの一覧とメッセージの中身確認することができます。
+　Kafka Topics UIのページではトピックの一覧とメッセージの中身を確認することができます。
 　
 ![landoop-topic.png](/2017/07/28/sensortag-kafka-python-spark-streaming-2/landoop-topic.png)
 
@@ -246,6 +252,6 @@ Connecting to B0:B4:48:BE:5E:00
 ```
 
 
-　Kafka Topics UIの画面からSensorTagの環境データの中身を確認することができます。
+　Kafka Topics UIの画面にもSensorTagの環境データが表示されました。
 
 ![landoop-sensortag.png](/2017/07/28/sensortag-kafka-python-spark-streaming-2/landoop-sensortag.png)
