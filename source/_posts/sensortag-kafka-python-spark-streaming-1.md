@@ -7,7 +7,7 @@ tags:
  - Kafka
  - Python
  - SensorTag
-description: Raspberry Pi 3でSensorTagのデータを所得します。
+description: Raspberry Pi 3からSensorTagの環境データを取得します。
 ---
 
 　このシリーズではRaspberry Pi 3からSensorTagの環境データを取得します。その後にKafkaを経由したSpark Streamingでウィンド分析するPythonのコードを書いてみます。
