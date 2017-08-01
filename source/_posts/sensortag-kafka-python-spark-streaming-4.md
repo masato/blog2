@@ -10,7 +10,7 @@ tags:
 description: Kafka ConnectはデータベースやKVSなど外部システムをKafkaに接続して連携させる仕組みです。スケールするストリーム処理のためのDataPipelineツールです。
 ---
 
-　Kafka ConnectはデータベースやKVSなど外部システムをKafkaに接続して連携させる仕組みです。スケールするストリーム処理のためのDataPipelineツールです。ちょうどメッセージフォーマットを[Apach Avroに変更](https://masato.github.io/2017/07/30/sensortag-kafka-python-spark-streaming-3/)したところです。[Kafka Connect UI](https://github.com/Landoop/kafka-connect-ui)ではデフォルトでAvroフォーマットを利用します。SensorTagのデータをKafkaのトピックを経由してMongoDBにSink(出力)してみます。
+　Kafka ConnectはデータベースやKVSなど外部システムをKafkaに接続して連携させる仕組みです。スケールするストリーム処理のためのDataPipelineツールです。ちょうどSensorTagのデータフォーマットを[Apache Avroに変更](https://masato.github.io/2017/07/30/sensortag-kafka-python-spark-streaming-3/)しました。[Kafka Connect UI](https://github.com/Landoop/kafka-connect-ui)ではデフォルトでAvroフォーマットを利用します。SensorTagのデータをKafkaのトピックを経由してMongoDBにSink(出力)してみます。
 
 
 <!-- more -->
