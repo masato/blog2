@@ -232,7 +232,7 @@ $ docker run -it --rm jupyter/all-spark-notebook:c1b0cf6bf4d6 jupyter --version
 
 　Jupyterの認証方法はデフォルトはtokenです。Dockerコンテナのように頻繁に起動と破棄を繰り返す場合に毎回異なるtokeを入れるのは面倒なのでパスワード認証に変更しました。ipythonを使いパスワードのハッシュ値を取得します。
 　
-```
+```python
 $ docker run -it --rm jupyter/all-spark-notebook:c1b0cf6bf4d6 ipython
 Python 3.6.1 | packaged by conda-forge | (default, May 23 2017, 14:16:20)
 Type 'copyright', 'credits' or 'license' for more information
@@ -241,7 +241,7 @@ IPython 6.1.0 -- An enhanced Interactive Python. Type '?' for help.
 
 　パスワードは以下のように生成します。出力されたハッシュ値をJupyterの起動オプションに指定します。
 
-```python
+```
 In [1]: from notebook.auth import passwd
 In [2]: passwd()
 
@@ -266,7 +266,7 @@ AWS_SECRET_ACCESS_KEY=xxx
 
 　Gitにcommitしないように忘れずに.gitignoreにも追加します。
 
-```.gitignore
+```
 .env
 ```
 
@@ -295,7 +295,7 @@ $ s3cmd put uber.csv s3://<バケット名>/uber-csv/
 　以下のようなコードを確認したいところでセルに分割してインタラクティブに実行することができます。ScalaのNotebookを書く場合は右上の`New`ボタンから`Apache Toree - Scala`を選択します。
 　
 
-``` scala
+```scala
 import org.apache.spark.sql.SparkSession
 
 val spark = SparkSession.
@@ -329,7 +329,7 @@ df.show(false)
 
 　Scalaの場合スキーマのStructTypeは次のようにも書くことができます。
 
-``` scala
+```scala
 val schema = (new StructType).
     add("dt", "timestamp", true).
     add("lat", "double", true).
