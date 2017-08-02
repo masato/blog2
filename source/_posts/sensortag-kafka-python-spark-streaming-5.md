@@ -6,7 +6,7 @@ tags:
  - Spark
  - Python
  - Scala
-description: parkクラスタを用意していくつかサンプルコードを書いていこうと思います。Pythonのデータ分析や機械学習の実行環境としてJupyterは多くの方が利用していると思います。Apache ToreeでSparkアプリも同じようにJupyterからインタラクティブに書くことが目的です。ブラウザから実行できるScalaのREPLしてもJupyterを使うことができます。
+description: Sparkクラスタを用意していくつかサンプルコードを書いていこうと思います。Pythonのデータ分析や機械学習の実行環境としてJupyterは多くの方が利用していると思います。Apache ToreeでSparkアプリも同じようにJupyterからインタラクティブに書くことが目的です。ブラウザから実行できるScalaのREPLしてもJupyterを使うことができます。
 ---
 
 　Sparkクラスタを用意していくつかサンプルコードを書いていこうと思います。Pythonのデータ分析や機械学習の実行環境としてJupyterは多くの方が利用していると思います。[Apache Toree](https://toree.apache.org/)でSparkアプリも同じようにJupyterからインタラクティブに書くことが目的です。ブラウザから実行できるScalaのREPLしてもJupyterを使うことができます。
@@ -98,10 +98,10 @@ $ docker-compose up -d
 
 　Spark Master UIを開いてクラスタの状態を確認します。
 
-![spark-standalone.png](/2017/08/01/sensortag-kafka-python-spark-streaming-5/spark-standalone.png)
+* http://<仮想マシンのパブリックIPアドレス>:8080
 
 　Masterコンテナのspark-shellを実行してScalaとSparkのバージョンを確認します。Sparkは開発のスピードがとても速く、Scalaのバージョンも含めてよく確認しないと思わぬエラーに遭遇してしまいます。
-　
+
 * Scala: 2.11.8
 * Spark: 2.1.1
 
@@ -125,13 +125,12 @@ scala>
 ## Jupyter
 
 　JupyterのDockerイメージは公式の[jupyter/all-spark-notebook](https://hub.docker.com/r/jupyter/all-spark-notebook/)を使います。ScalaやSparkまで使える全部入りのイメージです。
-　
+
 ### Apache Toree
-　
+
 　[Apache Toree](https://toree.apache.org/)はSparkクラスタにJupyterから接続するためのツールです。PySparkに加え、Scala、SparkR、SQLのKernelが提供されます。
 
 　[Dockerfile](https://github.com/jupyter/docker-stacks/blob/master/all-spark-notebook/Dockerfile)を見るとApache Toreeもインストールされています。
-
 
 ```Dockerfile
 # Apache Toree kernel
@@ -142,7 +141,7 @@ RUN jupyter toree install --sys-prefix
 ### docker-compose.yml
 
 　Spark Standalone Clusterのdocker-compose.ymlにJupyterサービスを追加します。
-　
+
 ```yaml docker-compose.yml
   jupyter:
     image: jupyter/all-spark-notebook:c1b0cf6bf4d6
@@ -169,11 +168,11 @@ RUN jupyter toree install --sys-prefix
 
 　`jupyter/all-spark-notebook`イメージは更新が頻繁に入ります。Apache Toreeで使うSparkとSparkクラスタのバージョンがエラーになり起動しなくなります。今回はSparkクラスタのバージョンは`2.1.1`なので同じバージョンのイメージのtagを指定します。`jupyter/all-spark-notebook`イメージのタグはIDしかわからないのが不便です。
 
-　Sparkのバージョンはすでに[2.2.0](https://github.com/jupyter/docker-stacks/commit/c740fbb1ca63db5856e004d29dd08d11fb4f91f8)へ上がっているため、`2.1.1`のタグを指定します。
-　
+　Sparkのバージョンはすでに[2.2.0](https://github.com/jupyter/docker-stacks/commit/c740fbb1ca63db5856e004d29dd08d11fb4f91f8)へ上がっているため`2.1.1`のタグを指定します。
+
 　タグのDockerイメージをpullして`spark-shell`で確認します。
 
-```
+```bash
 $ docker pull jupyter/all-spark-notebook:c1b0cf6bf4d6
 $ docker run -it --rm \
   jupyter/all-spark-notebook:c1b0cf6bf4d6 \
@@ -182,7 +181,7 @@ $ docker run -it --rm \
 
 　SparkクラスタとSparkとScalaのバージョンが同じであることが確認できました。
 
-```
+```bash
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
@@ -199,24 +198,22 @@ scala>
 
 　Jupyterのバージョンも確認しておきます。
 
-```
+```bash
 $ docker run -it --rm jupyter/all-spark-notebook:c1b0cf6bf4d6 jupyter --version
 4.3.0
 ```
 
 ### TINI_SUBREAPERとSPARK_OPTS
 
-　Apache Toreeを利用してJupyterからリモートのSparkに接続するために必須な設定はこの2つです。`TINI_SUBREAPER`環境変数はinitに[Tini](https://github.com/krallin/tini)を使います。
+　Apache Toreeを利用してJupyterからリモートのSparkに接続するために必須な設定はこの2つです。`TINI_SUBREAPER`環境変数はinitに[Tini](https://github.com/krallin/tini)を使います。Sparkで追加のJarファイルを使わない場合は`SPARK_OPTS`環境変数に以下の指定だけでリモートのSpark Standalone Clusterに接続できます。通常のspark-submitのオプションと同じです。
 
-　Sparkで追加のJarファイルを使わない場合は`SPARK_OPTS`環境変数に以下の指定だけでリモートのSpark Standalone Clusterに接続できます。通常のspark-submitのオプションと同じです。
-
-```
+```bash
 --master spark://master:7077 --deploy-mode client
 ```
 
 　追加のJarファイルがある場合はさらに`--packages`フラグを追加します。この場合はAmazon S3に接続するために必要なパッケージです。
 
-```
+```bash
 --packages com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.3
 ```
 
@@ -224,14 +221,12 @@ $ docker run -it --rm jupyter/all-spark-notebook:c1b0cf6bf4d6 jupyter --version
 
 　[Bokeh](http://bokeh.pydata.org/en/latest/)など可視化ツールで大きな画像イメージを扱う場合はJupyterの起動スクリプトのオプションを指定します。
 
-* 参考
+* [IOPub data rate exceeded when viewing image in Jupyter notebook](https://stackoverflow.com/questions/43288550/iopub-data-rate-exceeded-when-viewing-image-in-jupyter-notebook)
 
-[IOPub data rate exceeded when viewing image in Jupyter notebook](https://stackoverflow.com/questions/43288550/iopub-data-rate-exceeded-when-viewing-image-in-jupyter-notebook)
+### --NotebookApp.password
 
-#### --NotebookApp.password
+　Jupyterの認証方法はデフォルトはtokenです。Dockerコンテナのように頻繁に起動と破棄を繰り返す場合に毎回異なるtokenを入れるのは面倒なのでパスワード認証に変更しました。ipythonを使いパスワードのハッシュ値を取得します。
 
-　Jupyterの認証方法はデフォルトはtokenです。Dockerコンテナのように頻繁に起動と破棄を繰り返す場合に毎回異なるtokeを入れるのは面倒なのでパスワード認証に変更しました。ipythonを使いパスワードのハッシュ値を取得します。
-　
 ```python
 $ docker run -it --rm jupyter/all-spark-notebook:c1b0cf6bf4d6 ipython
 Python 3.6.1 | packaged by conda-forge | (default, May 23 2017, 14:16:20)
@@ -241,7 +236,7 @@ IPython 6.1.0 -- An enhanced Interactive Python. Type '?' for help.
 
 　パスワードは以下のように生成します。出力されたハッシュ値をJupyterの起動オプションに指定します。
 
-```
+```python
 In [1]: from notebook.auth import passwd
 In [2]: passwd()
 
@@ -254,37 +249,38 @@ Out[2]: 'sha1:xxx'
 
 　`/home/jovyan`はJupyterコンテナを実行しているユーザーのホームディレクトリです。作成したnotebookやダンロードしたJarファイルをDockerホストにマウントします。
 
-
 ### env_file
 
 　`.env`ファイルに環境変数を記述してコンテナに渡します。Amazon S3への接続に使うaccess key と secret keyを指定します。
 
-```
+```bash
 AWS_ACCESS_KEY_ID=xxx
 AWS_SECRET_ACCESS_KEY=xxx
 ```
 
 　Gitにcommitしないように忘れずに.gitignoreにも追加します。
 
-```
+```bash
 .env
 ```
 
 ## JupyterからSparkとAmazon S3を使う
 
-　JupyterでSparkとAmazon S3を使うサンプルをScalaとPythonで書いてみようと思います。[Monitoring Real-Time Uber Data Using Apache APIs, Part 1: Spark Machine Learning](https://dzone.com/articles/monitoring-real-time-uber-data-using-apache-apis-p)の記事で利用しているUberのピックアップデータをサンプルに使います。ここでは単純にCSVファイルをS3から読み込んで表示するだけです。
+　JupyterでSparkとAmazon S3を使うサンプルをScalaとPythonで書いてみようと思います。[Monitoring Real-Time Uber Data Using Apache APIs, Part 1: Spark Machine Learning](https://dzone.com/articles/monitoring-real-time-uber-data-using-apache-apis-p)の記事で利用しているUberのピックアップデータをサンプルに使います。ここでは単純にCSVファイルをS3から読み込んで表示するだけです。docker-compose.ymlに定義した全てのサービスを起動します。
 
-　docker-compose.ymlに定義した全てのサービスを起動します。
-　
-```
+```bash
 $ docker-compose up -d
 ```
+
+　Jupyterをブラウザで開きさきほど作成したパスワードでログインします。
+
+* http://<仮想マシンのパブリックIPアドレス>:8888
 
 ### データ準備
 
 　リポジトリをcloneしたあと`uber.csv`ファイルを`s3cmd`から適当なバケットにputします。
 
-```
+```bash
 $ git clone https://github.com/caroljmcdonald/spark-ml-kmeans-uber
 $ cd spark-ml-kmeans-uber/data
 $ s3cmd put uber.csv s3://<バケット名>/uber-csv/
@@ -293,7 +289,6 @@ $ s3cmd put uber.csv s3://<バケット名>/uber-csv/
 ### Scala
 
 　以下のようなコードを確認したいところでセルに分割してインタラクティブに実行することができます。ScalaのNotebookを書く場合は右上の`New`ボタンから`Apache Toree - Scala`を選択します。
-　
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -337,10 +332,9 @@ val schema = (new StructType).
     add("base", "string", true)
 ```
 
-
 　最後の`df.show(false)`の出力結果です。
-　
-```
+
+```bash
 +---------------------+-------+--------+------+
 |dt                   |lat    |lon     |base  |
 +---------------------+-------+--------+------+
@@ -374,7 +368,7 @@ only showing top 20 rows
 
 　以下のようにPythonでもほぼScalaと同じようにでSparkアプリを書くことができます。
 
-``` python
+```python
 import os
 os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.3 pyspark-shell'
 
@@ -415,7 +409,7 @@ df.show(truncate=False)
 
 　最後の`df.show(truncate=False)`の出力結果は先ほどのScalaのコードと同じです。
 
-```
+```bash
 +---------------------+-------+--------+------+
 |dt                   |lat    |lon     |base  |
 +---------------------+-------+--------+------+
