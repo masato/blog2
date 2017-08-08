@@ -42,6 +42,7 @@ $ tree -a
 
 
 ```yaml docker-compose.yml
+version: '2'
 services:
   kafka-stack:
     image: landoop/fast-data-dev

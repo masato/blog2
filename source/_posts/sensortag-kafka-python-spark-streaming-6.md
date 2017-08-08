@@ -12,6 +12,8 @@ description: ようやくタイトルのコードを実行する準備ができ�
 
 　ようやくタイトルのコードを実行する準備ができました。SensorTagのデータをKafkaに送信してPySpark Streamingのウィンドウ集計します。JupyterをPythonのインタラクティブな実行環境に使います。
 
+<!-- more -->
+
 ## 準備
 
 　これまでに用意したPythonスクリプトとKafka、Sparkのクラスタを使います。
@@ -37,6 +39,15 @@ description: ようやくタイトルのコードを実行する準備ができ�
 import os
 os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.1 pyspark-shell'
 ```
+
+### マジックコマンド
+
+　[kafka-python](https://github.com/dpkp/kafka-python)パッケージをインストールします。Jupyterの[マジックコマンド](http://ipython.readthedocs.io/en/stable/interactive/magics.html)を使います。
+
+```
+!pip install kafka-python
+```
+
 
 ### import
 
