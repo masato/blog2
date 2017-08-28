@@ -1,5 +1,6 @@
 title: "EclimでJavaもEmacsからコーディングする"
-date: 2017-08-03 07:32:05
+date: 2017-08-04 09:32:05
+categories:
  - Java
  - Emacs
  - Eclim
@@ -74,9 +75,10 @@ GNU Emacs 24.5.1
 
 ### Cask
 
-　Emacsのパッケージ管理のため[Cask](http://cask.github.io/)をインストールします。
+　Emacsパッケージ管理の[Cask](http://cask.github.io/)です。インストールにはGitとPythonが必要です。
 
 ```bash
+$ sudo apt-get install git python -y
 $ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 $ echo 'export PATH="$HOME/.cask/bin:$PATH"' >> ~/.bashrc
 $ source ~/.bashrc
@@ -86,7 +88,6 @@ $ source ~/.bashrc
 
 ```bash
 $ tree ~/.emacs.d
-.emacs.d.bak/
 ├── Cask
 ├── init.el
 └── inits

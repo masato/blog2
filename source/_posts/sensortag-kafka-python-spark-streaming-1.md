@@ -28,7 +28,7 @@ description: Raspberry Pi 3からSensorTagの環境データを取得します�
 　
 * [CC2650](http://www.tij.co.jp/tool/jp/TIDC-CC2650STK-SENSORTAG)
 
-## macOSでRaspbeian Liteイメージを焼く
+## macOSでRaspbian Liteイメージを焼く
 
 　オフィシャルの[Installing operating system images on Mac OS](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)の手順に従います。SDカードのデバイス名を確認してunmountします。この例では/dev/disk2です。
 
