@@ -19,7 +19,7 @@ description: SensorTagのセンサーデータをApache FlinkとScala APIを使�
 　[Sample Project using the Java API](https://ci.apache.org/projects/flink/flink-docs-release-1.3/quickstart/java_api_quickstart.html)にある[flink-quickstart-java](https://mvnrepository.com/artifact/org.apache.flink/flink-quickstart-java)を使いMavenプロジェクトを作成します。Apache FlinkのバージョンはScalaの時と同じ`1.3.2`です。`groupId`や`package`は環境にあわせて変更してください。
 
 ```bash
-$ mkdir -p cd ~/java_apps && cd ~/java_apps
+$ mkdir -p ~/java_apps && cd ~/java_apps
 $ mvn archetype:generate \
     -DarchetypeGroupId=org.apache.flink \
     -DarchetypeArtifactId=flink-quickstart-java \

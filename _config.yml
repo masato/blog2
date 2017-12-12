@@ -5,7 +5,8 @@
 # Site
 title: "masato's blog"
 subtitle:
-description: "IoT, RaspberryPi, Arduino, Meshblu, Docker, Node.js, Clojure, ClojureScript"
+#description: "IoT, RaspberryPi, Arduino, Meshblu, Docker, Node.js, Clojure, ClojureScript"
+
 author: "Masato Shimizu"
 email: ma6ato@gmail.com
 language: default
