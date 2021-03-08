@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: "masato's blog"
-subtitle: ""
-author: "Masato Shimizu"
+title: "masato's web site"
+subtitle: ''
+author: 'Masato Shimizu'
 email: ma6ato@gmail.com
 language: en
 avatar: /images/profile.png
@@ -75,7 +75,7 @@ meta_generator: true
 date_format: MMM D YYYY
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+updated_option: 'date'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -132,7 +132,7 @@ tag: 2
 #swiftype_key: 8GQx4kKNyyYzP_SB_GtM
 
 algolia:
-  applicationID: 'UUTBN653E1'
-  apiKey: '4604ee38232a3d6b0390e8096361ad7e'
+  applicationID: '4I3PCHZTBH'
+  apiKey: '1fa32a4d0aab855faab443dd3150228d'
   indexName: 'Hexo'
   chunkSize: 5000
